@@ -20,7 +20,7 @@ while True:
     Message= "$SW,"+aBinCnt[2]+","+aBinCnt[1]+","+aBinCnt[0]
 
     # Send the csv string as a UDP message
-    sock.sendto(Message, (UDP_IP, UDP_PORT))
+    sock.sendto(Message.encode('utf-8'), (UDP_IP, UDP_PORT))
 
     print ("Sendt Message: "+Message)
 

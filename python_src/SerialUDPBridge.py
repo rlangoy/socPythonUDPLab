@@ -7,16 +7,18 @@ from threading import Thread
 def recvUDP(sock,SerialIOArduino):
     while True:
         data, addr = sock.recvfrom(1280) # Max recieve size is 1280 bytes
-        print "UDP received message:", data.strip()
-        SerialIOArduino.write(data)
+        print ("UDP received message:", data.strip())
+        #print ("Data len = %d "% len(data))
+        if(len(data)>0):
+            SerialIOArduino.write(data)
 
 port = "/dev/ttyACM0"
 
 UDP_IP = "127.0.0.1"
 UDP_PORT = 9050
- 
-print "UDP target IP:",   UDP_IP
-print "UDP target port:", UDP_PORT
+
+print ("UDP target IP:",   UDP_IP)
+print ("UDP target port:", UDP_PORT)
 
 sock = socket.socket(socket.AF_INET,     # Internet protocol
                      socket.SOCK_DGRAM)  # User Datagram (UDP)
@@ -35,4 +37,3 @@ while True:
 
         # Send the csv string as a UDP message
         sock.sendto(inputLine, (UDP_IP, UDP_PORT))
-    
